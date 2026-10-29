@@ -1,0 +1,16 @@
+\begin{table}
+\caption{Operating Threshold Sweep and Asymmetric Cost-Sensitive Impact Analysis}
+\label{tab:threshold_optimization}
+\begin{tabular}{lccccc}
+\toprule
+Operating Policy & Threshold (tau) & Precision & Recall & F1-Score & Total Risk Cost ($) \\
+\midrule
+High Sensitivity (Zero-Trust) & 0.198000 & 95.240000 & 97.830000 & 96.510000 & 5512.820000 \\
+Aggressive Phishing Quarantine & 0.347000 & 98.900000 & 97.830000 & 98.360000 & 5213.680000 \\
+Standard Balanced Baseline & 0.495000 & 100.000000 & 96.740000 & 98.340000 & 7692.310000 \\
+Cost-Optimal Inflection (tau*) & 0.079000 & 84.650000 & 98.910000 & 91.230000 & 3974.360000 \\
+Maximal F1 Optimization & 0.376000 & 100.000000 & 97.830000 & 98.900000 & 5128.210000 \\
+Conservative (Low False Alarm) & 0.802000 & 100.000000 & 89.130000 & 94.250000 & 25641.030000 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,8 @@
+Variant,Ablated,Accuracy,Precision,Recall,F1,Delta Accuracy Drop (%)
+Proposed Full Six-Layer Hybrid Engine,None (All Layers Active),90.91,100.0,85.71,92.31,0.0
+w/o Layer 1 (Header & Spoofing Auth),No SPF/DKIM/Domain Checks,81.82,100.0,71.43,83.33,-9.09
+w/o Layer 2 (Behavioral & Anomaly Logic),No Off-Hour / Behavioral Checks,81.82,100.0,71.43,83.33,-9.09
+w/o Layer 3 (Link & Attachment Sandbox),No URL / Attachment Filter,72.73,100.0,57.14,72.73,-18.18
+w/o Layer 4 & 5 (Just-in-Time Warning & OTP),No JIT Prompts & 2FA Fallback,81.82,100.0,71.43,83.33,-9.09
+w/o Layer 6 (AI Machine Learning Model),Rule-Based Heuristics Only,63.64,100.0,42.86,60.0,-27.27
+Standalone AI (Baseline Only),No Rules or Context Fusion,81.82,100.0,71.43,83.33,-9.09

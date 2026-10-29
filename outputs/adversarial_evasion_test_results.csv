@@ -1,0 +1,6 @@
+Type,NLP_Accuracy,Hybrid_Accuracy,Hybrid Robustness Advantage (%)
+Clean Baseline Phishing,81.82,90.91,9.090000000000003
+Homoglyph Character Injection,63.64,90.91,27.269999999999996
+Zero-Width Space & Token Splitting,54.55,90.91,36.36
+LLM Paraphrased Low-Urgency Evasion,54.55,81.82,27.269999999999996
+Obfuscated QR / Image Payload,45.45,81.82,36.36999999999999

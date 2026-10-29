@@ -12,8 +12,10 @@ from sklearn.linear_model import LogisticRegression
 # ============================================================
 # PROJECT PATH
 # ============================================================
-BASE_PATH = Path(__file__).resolve().parent.parent
+BASE_PATH = Path(__file__).resolve().parent
 RAW_DATA = BASE_PATH / "Data" / "raw"
+if not RAW_DATA.exists():
+    RAW_DATA = BASE_PATH
 
 print("=" * 70)
 print("AI PHISHING PREVENTION SYSTEM")
@@ -75,6 +77,8 @@ def convert_label(value):
 # DATASET LOADING (only show the total dataset count)
 # ============================================================
 dataset_order = [
+    "sms_benchmark.tsv",
+    "kaggle_phishing_emails.csv",
     "dataset.csv",
     "Phishing_Email.csv",
     "Phishing_validation_emails.csv",
@@ -111,10 +115,13 @@ for filename in dataset_order:
         continue
 
     try:
-        try:
-            df = pd.read_csv(path, encoding="utf-8-sig", on_bad_lines="skip")
-        except (UnicodeDecodeError, pd.errors.ParserError):
-            df = pd.read_csv(path, encoding="latin-1", on_bad_lines="skip")
+        if str(path).endswith('.tsv'):
+            df = pd.read_csv(path, sep='	', header=None, names=['label', 'message'])
+        else:
+            try:
+                df = pd.read_csv(path, encoding="utf-8-sig", on_bad_lines="skip")
+            except (UnicodeDecodeError, pd.errors.ParserError):
+                df = pd.read_csv(path, encoding="latin-1", on_bad_lines="skip")
 
         if df.empty:
             continue

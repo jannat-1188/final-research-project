@@ -1,0 +1,14 @@
+\begin{table}
+\caption{MITRE ATT&CK Threat Mapping and Corresponding Multi-Layer Defensive Controls}
+\label{tab:mitre_matrix}
+\begin{tabular}{lllll}
+\toprule
+ATT&CK ID & Technique Name & Scam Vector & Cognitive Trigger & Defensive Layer \\
+\midrule
+T1566.001 & Spearphishing Attachment & Email / Corporate & Urgency & Fear & Layer 1 & Layer 3 (Sandbox) \\
+T1566.002 & Spearphishing Link & Email / WhatsApp & Trust & Authority & Layer 3 & Layer 6 (AI Content) \\
+T1566.003 & Spearphishing via Service & Telegram / Social Media & Reward & Greed & Layer 2 & Layer 5 (OTP) \\
+T1598.002 & Phishing for Information & Visual / Image Scams & Message Clarity & Urgency & Layer 4 (JIT Alert) & Layer 6 \\
+\bottomrule
+\end{tabular}
+\end{table}

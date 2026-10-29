@@ -1,0 +1,16 @@
+Feature Signal,Mean Absolute SHAP Value
+Char_Entropy,0.9346
+Short_Msg_Flag,0.8796
+Log_Len,0.6108
+Flesch_Readability,0.2755
+Greed_Score,0.2516
+Log_Words,0.231
+Type_Token_Ratio,0.2256
+Authority_Score,0.1716
+Urgency_Score,0.1232
+Currency_Flag,0.0908
+Excls,0.0768
+Homoglyphs,0.0537
+URL_Entropy,0.0532
+Cap_Ratio,0.043
+High_Cap_Flag,0.0405

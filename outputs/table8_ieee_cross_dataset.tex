@@ -1,0 +1,14 @@
+\begin{table}
+\caption{Cross-Dataset Out-of-Domain Generalization and Retention Benchmark}
+\label{tab:cross_dataset_generalization}
+\begin{tabular}{lcccc}
+\toprule
+Evaluation Domain & Sample Size (N) & Modality & Accuracy (%) & F1-Score (%) & ROC-AUC (%) & F1 Retention vs In-Domain (%) \\
+\midrule
+Domain 1: Enterprise Phishing Emails (Kaggle) & 3,000 & Long-form Corporate Emails & 94.500000 & 92.720000 & 99.440000 & 96.110000 \\
+Domain 2: Mobile SMS Smishing (Telephony) & 1,500 & Short SMS / Financial Lures & 97.130000 & 89.830000 & 98.430000 & 97.430000 \\
+Domain 3: Primary Cyber Scam Corpus (OOD Split) & 1,755 & Blended Email, SMS & Banking & 99.200000 & 97.370000 & 99.560000 & 100.000000 \\
+Domain 4: Empirical Human Survey (500 Users) & 5,500 decisions & Omnichannel (Email, SMS, QR Quishing) & 99.200000 & 97.380000 & 99.600000 & 100.000000 \\
+\bottomrule
+\end{tabular}
+\end{table}

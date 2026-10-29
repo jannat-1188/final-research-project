@@ -1,0 +1,11 @@
+Evidence Token / Signal,SHAP Attribution Weight
+Fear_Score,4.0381
+Authority_Score,3.1417
+URL_Entropy,1.5923
+Char_Entropy,1.3684
+Flesch_Readability,1.0318
+Short_Msg_Flag,0.9162
+Urgency_Score,0.8765
+URL_Flag,0.5161
+Type_Token_Ratio,0.2669
+alert,0.1127

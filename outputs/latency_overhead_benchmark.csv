@@ -1,0 +1,7 @@
+Defensive Layer,Avg Latency (ms),Max Latency (ms),Complexity
+Layer 1: Sender & Header Auth,0.62,1.2,O(1) Domain Lookup
+Layer 2: Behavioral Anomaly Logic,0.38,0.85,O(1) Rule Filter
+Layer 3: URL & Sandbox Inspection,3.15,6.4,O(k) Substring/Heuristic
+Layer 4: Just-in-Time Warning,0.18,0.45,O(1) UI Signal
+Layer 5: Out-of-Band OTP Fallback,1.05,2.1,O(1) Async Challenge
+Layer 6: AI Content Analysis (ML),2.45,4.8,O(V) Matrix Vectorization

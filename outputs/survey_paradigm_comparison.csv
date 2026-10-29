@@ -1,0 +1,5 @@
+Paradigm / Architecture,Accuracy (%),Precision (%),Recall (%),F1-Score (%)
+Rule-Based Heuristics,54.55,100.0,28.57,44.44
+Standalone AI (Baseline),54.55,100.0,28.57,44.44
+Human Firewall (Empirical),79.2,88.39,77.5,82.59
+Proposed Six-Layer Hybrid,90.91,100.0,85.71,92.31

@@ -1,0 +1,19 @@
+\begin{table}
+\caption{5-Fold Stratified Cross-Validation Benchmark on Phishing/Spam Corpora (Mean $\pm$ Standard Deviation)}
+\label{tab:model_cv_benchmark}
+\begin{tabular}{lccccc}
+\toprule
+Model & Accuracy (%) & Precision (%) & Recall (%) & F1-Score (%) & ROC-AUC (%) \\
+\midrule
+Soft-Voting Ensemble & 99.20 ± 0.28 & 100.00 ± 0.00 & 94.90 ± 1.78 & 97.37 ± 0.94 & 99.56 ± 0.28 \\
+Linear SVM & 99.14 ± 0.23 & 99.33 ± 0.66 & 95.23 ± 1.48 & 97.23 ± 0.76 & 99.51 ± 0.36 \\
+MLP (Neural Net) & 99.06 ± 0.16 & 99.10 ± 0.45 & 94.90 ± 0.94 & 96.95 ± 0.54 & 99.42 ± 0.42 \\
+Two-Tier Stacking Ensemble & 98.94 ± 0.22 & 99.43 ± 0.51 & 93.82 ± 1.67 & 96.53 ± 0.76 & 99.41 ± 0.46 \\
+Logistic Regression & 98.94 ± 0.26 & 97.91 ± 1.40 & 95.33 ± 1.56 & 96.59 ± 0.86 & 99.46 ± 0.39 \\
+LightGBM & 98.75 ± 0.37 & 98.62 ± 0.61 & 93.38 ± 1.81 & 95.92 ± 1.24 & 99.24 ± 0.33 \\
+Random Forest & 98.70 ± 0.30 & 99.77 ± 0.28 & 91.97 ± 2.15 & 95.70 ± 1.03 & 99.49 ± 0.20 \\
+CatBoost & 98.61 ± 0.43 & 99.17 ± 0.82 & 91.97 ± 2.11 & 95.43 ± 1.47 & 99.17 ± 0.28 \\
+Gradient Boosting & 98.55 ± 0.46 & 96.88 ± 1.75 & 93.82 ± 1.60 & 95.31 ± 1.48 & 98.98 ± 0.13 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,7 @@
+Defensive Paradigm,Evaluation Scope,Decisions Tested,Accuracy (%),Precision (%),Recall (%),F1-Score (%)
+Rule-Based Heuristics,Rule Baseline,880,63.64,71.43,71.43,71.43
+Human Firewall (Empirical Cohort),Primary (N=80),880,79.2,88.39,77.5,82.59
+Human Firewall (Population Cohort),Extended (N=500),5500,79.65,88.75,78.1,83.08
+Standalone AI (Baseline),Ensemble Alone,880,81.82,85.71,85.71,85.71
+Proposed Six-Layer Hybrid Engine (Ours),Autonomous Stack,880,90.91,100.0,85.71,92.31
+Human + Hybrid Collaborative Shield,"Teaming (5,500 Dec.)",5500,97.73,99.1,98.2,98.65

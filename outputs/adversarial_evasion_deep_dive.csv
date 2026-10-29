@@ -1,0 +1,6 @@
+Adversarial Attack Vector,Standalone NLP (%),Proposed Six-Layer Hybrid (%),Resilience Advantage
+Baseline Phishing (Unperturbed),81.82,90.91,+9.09%
+Attack 1: Homoglyph Character Injection,63.64,81.82,+18.18%
+Attack 2: Zero-Width Token Splitting,54.55,90.91,+36.36%
+Attack 3: LLM Fluency Paraphrasing,54.55,63.64,+9.09%
+Attack 4: Obfuscated QR / Image Payload,45.45,81.82,+36.37%

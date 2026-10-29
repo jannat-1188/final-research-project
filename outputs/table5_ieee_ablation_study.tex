@@ -1,0 +1,17 @@
+\begin{table}
+\caption{Systematic Defensive Layer Ablation Analysis of the Proposed Six-Layer Hybrid Engine}
+\label{tab:ablation_study}
+\begin{tabular}{llccccc}
+\toprule
+Variant & Ablated & Accuracy & Precision & Recall & F1 & Delta Accuracy Drop (%) \\
+\midrule
+Proposed Full Six-Layer Hybrid Engine & None (All Layers Active) & 90.910000 & 100.000000 & 85.710000 & 92.310000 & 0.000000 \\
+w/o Layer 1 (Header & Spoofing Auth) & No SPF/DKIM/Domain Checks & 81.820000 & 100.000000 & 71.430000 & 83.330000 & -9.090000 \\
+w/o Layer 2 (Behavioral & Anomaly Logic) & No Off-Hour / Behavioral Checks & 81.820000 & 100.000000 & 71.430000 & 83.330000 & -9.090000 \\
+w/o Layer 3 (Link & Attachment Sandbox) & No URL / Attachment Filter & 72.730000 & 100.000000 & 57.140000 & 72.730000 & -18.180000 \\
+w/o Layer 4 & 5 (Just-in-Time Warning & OTP) & No JIT Prompts & 2FA Fallback & 81.820000 & 100.000000 & 71.430000 & 83.330000 & -9.090000 \\
+w/o Layer 6 (AI Machine Learning Model) & Rule-Based Heuristics Only & 63.640000 & 100.000000 & 42.860000 & 60.000000 & -27.270000 \\
+Standalone AI (Baseline Only) & No Rules or Context Fusion & 81.820000 & 100.000000 & 71.430000 & 83.330000 & -9.090000 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,12 @@
+Scenario,Channel,Ground Truth,"Human Accuracy (N=500, %)","Human Error Rate (N=500, %)",Proposed Hybrid Accuracy (%)
+Mail 1,Email,Scam,77.6,22.4,100.0
+Mail 2,Email,Scam,60.2,39.8,100.0
+Mail 3,Email,Legitimate,86.4,13.6,100.0
+Text 1,Messaging,Scam,68.2,31.8,100.0
+Text 2,Messaging,Scam,92.0,8.0,100.0
+Text 3,Messaging,Scam,71.0,29.0,100.0
+Text 4,Messaging,Legitimate,85.0,15.0,100.0
+Text 5,Messaging,Legitimate,84.8,15.2,100.0
+Image 1,Visual / Image,Scam,95.6,4.4,100.0
+Image 2,Visual / Image,Scam,75.0,25.0,0.0
+Image 3,Visual / Image,Legitimate,80.4,19.6,100.0

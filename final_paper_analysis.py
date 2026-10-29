@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
-import os 
+import os
+import warnings
+warnings.filterwarnings("ignore")
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
@@ -15,9 +17,24 @@ from sklearn.metrics import (
 # ============================================================
 # PATHS
 # ============================================================
-BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 RAW_DATA_DIR = os.path.join(BASE_PATH, "Data", "raw")
 SURVEY_DIR = os.path.join(BASE_PATH, "Data", "survey")
+
+# Also check parent directory if Data was placed outside
+if not os.path.exists(RAW_DATA_DIR):
+    alt_raw = os.path.join(os.path.dirname(BASE_PATH), "Data", "raw")
+    if os.path.exists(alt_raw):
+        RAW_DATA_DIR = alt_raw
+
+if not os.path.exists(SURVEY_DIR):
+    alt_survey = os.path.join(os.path.dirname(BASE_PATH), "Data", "survey")
+    if os.path.exists(alt_survey):
+        SURVEY_DIR = alt_survey
+
+# Output directory
+OUTPUTS_DIR = os.path.join(BASE_PATH, "outputs")
+os.makedirs(OUTPUTS_DIR, exist_ok=True)
 
 # ============================================================
 # 1. LOAD RAW DATASETS (TRAINING DATA)
@@ -25,9 +42,11 @@ SURVEY_DIR = os.path.join(BASE_PATH, "Data", "survey")
 print("=" * 60)
 print("FINAL PAPER ANALYSIS")
 print("=" * 60)
-print("\nLoading all CSV files from Data/raw ...")
+print("\nLoading dataset files...")
 
 file_order = [
+    "sms_benchmark.tsv",
+    "kaggle_phishing_emails.csv",
     "dataset.csv",
     "Phishing_Email.csv",
     "Phishing_validation_emails.csv",
@@ -41,16 +60,36 @@ file_order = [
 all_texts = []
 all_labels = []
 total_rows = 0
-for filename in file_order:
-    file_path = os.path.join(RAW_DATA_DIR, filename)
 
-    if not os.path.exists(file_path):
-        print(f"   Reading {filename} ... Skipped (file not found)")
+search_dirs = [BASE_PATH, RAW_DATA_DIR]
+
+for filename in file_order:
+    file_path = None
+    for s_dir in search_dirs:
+        candidate = os.path.join(s_dir, filename)
+        if os.path.exists(candidate):
+            file_path = candidate
+            break
+
+    if file_path is None:
         continue
 
     print(f"   Reading {filename} ...", end=" ")
 
     try:
+        if filename.endswith(".tsv"):
+            df = pd.read_csv(file_path, sep="\t", header=None, names=["label", "message"])
+            df["text"] = df["message"]
+            df["label_col"] = df["label"].map({"ham": 0, "spam": 1})
+            valid_pairs = [(str(t), int(l)) for t, l in zip(df["text"], df["label_col"]) if str(t).strip() and l in (0, 1)]
+            if valid_pairs:
+                v_txts = [x[0] for x in valid_pairs]
+                v_labs = [x[1] for x in valid_pairs]
+                all_texts.extend(v_txts)
+                all_labels.extend(v_labs)
+                total_rows += len(v_txts)
+                print(f"Added ({len(v_txts)}) rows")
+            continue
         try:
             df = pd.read_csv(
                 file_path,
@@ -525,48 +564,67 @@ hybrid_test_acc = accuracy_score(y_test, hybrid_preds) * 100
 # ============================================================
 # 4. LOAD SURVEY DATA AND CORRECT ANSWERS
 # ============================================================
-answer_file = os.path.join(SURVEY_DIR, "answer_key.csv")
-if not os.path.exists(answer_file):
-    print(f"ERROR: {answer_file} not found.")
+answer_candidates = [
+    os.path.join(BASE_PATH, "answer_key.csv.xls"),
+    os.path.join(BASE_PATH, "answer_key.csv"),
+    os.path.join(SURVEY_DIR, "answer_key.csv"),
+    os.path.join(SURVEY_DIR, "answer_key.csv.xls")
+]
+answer_file = None
+for cand in answer_candidates:
+    if os.path.exists(cand):
+        answer_file = cand
+        break
+
+if answer_file is None:
+    print("ERROR: answer_key file not found.")
     exit()
 
-correct_df = pd.read_csv(answer_file, encoding='utf-8-sig')
+try:
+    correct_df = pd.read_csv(answer_file, encoding='utf-8-sig')
+except Exception:
+    correct_df = pd.read_excel(answer_file)
 correct_df.columns = correct_df.columns.str.strip()
 
 answer_dict = {}
 for _, row in correct_df.iterrows():
-    if pd.notna(row['Portion_ID']) and pd.notna(row['Answer']):
-        key = str(row['Portion_ID']).strip().replace(':', '').strip()
-        answer_dict[key] = str(row['Answer']).strip()
+    p_col = row['Portion_ID'] if 'Portion_ID' in row else row.iloc[0]
+    a_col = row['Answer'] if 'Answer' in row else row.iloc[-1]
+    if pd.notna(p_col) and pd.notna(a_col):
+        key = str(p_col).strip().replace(':', '').strip()
+        answer_dict[key] = str(a_col).strip()
 
 # ============================================================
 # LOAD THE ACTUAL SURVEY RESPONSE FILE
 # ============================================================
-# The project uses exactly:
-# Data/survey/responses.csv
-responses_file = os.path.join(
-    BASE_PATH,
-    "Data",
-    "survey",
-    "responses.csv"
-)
+response_candidates = [
+    os.path.join(BASE_PATH, "responses.csv.xls"),
+    os.path.join(BASE_PATH, "responses.csv"),
+    os.path.join(SURVEY_DIR, "responses.csv"),
+    os.path.join(SURVEY_DIR, "responses.csv.xls")
+]
+responses_file = None
+for cand in response_candidates:
+    if os.path.exists(cand):
+        responses_file = cand
+        break
 
-print("\\nLoading survey responses...")
+print("\nLoading survey responses...")
 print(f"Survey response file: {responses_file}")
 
-if not os.path.isfile(responses_file):
+if responses_file is None:
     raise FileNotFoundError(
-        "responses.csv was not found at the expected project path:\\n"
-        f"{responses_file}\\n\\n"
-        "Make sure the file name is exactly 'responses.csv' "
-        "and that it is inside Data/survey."
+        "responses file was not found at expected project paths."
     )
 
-survey_df = pd.read_csv(
-    responses_file,
-    encoding="utf-8-sig",
-    on_bad_lines="skip"
-)
+try:
+    survey_df = pd.read_csv(
+        responses_file,
+        encoding="utf-8-sig",
+        on_bad_lines="skip"
+    )
+except Exception:
+    survey_df = pd.read_excel(responses_file)
 survey_df.columns = survey_df.columns.str.strip()
 
 print(f"Survey responses loaded successfully: {len(survey_df)} rows")
@@ -980,8 +1038,7 @@ if len(human_true) > 0:
 
     comparison_df.to_csv(
         os.path.join(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-            "outputs",
+            OUTPUTS_DIR,
             "survey_method_comparison.csv"
         ),
         index=False
@@ -1012,8 +1069,7 @@ print(raw_comparison_df.to_string(index=False))
 
 raw_comparison_df.to_csv(
     os.path.join(
-        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-        "outputs",
+        OUTPUTS_DIR,
         "raw_method_comparison.csv"
     ),
     index=False

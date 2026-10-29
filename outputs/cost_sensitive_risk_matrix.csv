@@ -1,0 +1,5 @@
+Defensive Architecture,False Negatives (per 1k),False Positives (per 1k),Breach Loss Cost ($),Productivity Friction ($),Total Expected Risk Cost ($),Cost Reduction vs Human (%)
+Rule-Based Heuristics,454.5,0.0,2272727.27,0.0,2272727.27,-216.03
+Standalone AI (Baseline),454.5,0.0,2272727.27,0.0,2272727.27,-216.03
+Human Firewall (Empirical),143.2,64.8,715909.09,3238.64,719147.73,0.0
+Proposed Six-Layer Hybrid,90.9,0.0,454545.45,0.0,454545.45,36.79

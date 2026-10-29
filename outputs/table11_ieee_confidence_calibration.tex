@@ -1,0 +1,16 @@
+\begin{table}
+\caption{Probabilistic Confidence Calibration and Reliability Metrics across Model Architectures}
+\label{tab:confidence_calibration}
+\begin{tabular}{lccc}
+\toprule
+Model & ECE (%) & MCE (%) & Brier Score \\
+\midrule
+Linear SVM & 0.800000 & 52.140000 & 0.004900 \\
+LightGBM & 0.900000 & 42.900000 & 0.007600 \\
+Gradient Boosting & 1.470000 & 56.070000 & 0.013000 \\
+Soft-Voting Ensemble & 2.240000 & 54.860000 & 0.006400 \\
+Random Forest & 3.260000 & 54.750000 & 0.011000 \\
+Logistic Regression & 3.330000 & 40.650000 & 0.008700 \\
+\bottomrule
+\end{tabular}
+\end{table}

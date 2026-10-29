@@ -1,0 +1,5 @@
+ATT&CK ID,Technique Name,Scam Vector,Cognitive Trigger,Defensive Layer
+T1566.001,Spearphishing Attachment,Email / Corporate,Urgency & Fear,Layer 1 & Layer 3 (Sandbox)
+T1566.002,Spearphishing Link,Email / WhatsApp,Trust & Authority,Layer 3 & Layer 6 (AI Content)
+T1566.003,Spearphishing via Service,Telegram / Social Media,Reward & Greed,Layer 2 & Layer 5 (OTP)
+T1598.002,Phishing for Information,Visual / Image Scams,Message Clarity & Urgency,Layer 4 (JIT Alert) & Layer 6

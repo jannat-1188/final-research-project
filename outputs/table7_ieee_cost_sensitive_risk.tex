@@ -1,0 +1,14 @@
+\begin{table}
+\caption{Cost-Sensitive Risk and Financial Impact Matrix (Normalized per 1,000 Communications)}
+\label{tab:cost_sensitive_risk}
+\begin{tabular}{lcccc}
+\toprule
+Defensive Architecture & False Negatives (per 1k) & False Positives (per 1k) & Total Expected Risk Cost ($) & Cost Reduction vs Human (%) \\
+\midrule
+Rule-Based Heuristics & 454.500000 & 0.000000 & 2272727.270000 & -216.030000 \\
+Standalone AI (Baseline) & 454.500000 & 0.000000 & 2272727.270000 & -216.030000 \\
+Human Firewall (Empirical) & 143.200000 & 64.800000 & 719147.730000 & 0.000000 \\
+Proposed Six-Layer Hybrid & 90.900000 & 0.000000 & 454545.450000 & 36.790000 \\
+\bottomrule
+\end{tabular}
+\end{table}
